@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Contacts</string>
     <string name="txt_img_description">Img Contacto</string>
+    <string name="txt_new_contact">Nuevo</string>
+    <string name="title_item_search">Search</string>
+    <string name="title_item_switch">Switch</string>
 </resources>
