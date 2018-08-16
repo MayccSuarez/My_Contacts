@@ -1,5 +1,6 @@
 package com.maycc.mycontacts
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mainToolbar)
         loadData()
         initListViewContacts()
+        addListenerListViewContacts()
     }
 
     private fun loadData() {
@@ -30,6 +32,14 @@ class MainActivity : AppCompatActivity() {
     private fun initListViewContacts() {
         val adapter = ContactAdapter(this, contacts)
         lvContacts.adapter = adapter
+    }
+
+    private fun addListenerListViewContacts() {
+        lvContacts.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(this, ContactDetailActivity::class.java)
+            intent.putExtra("CONTACT_POSITION", position)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
