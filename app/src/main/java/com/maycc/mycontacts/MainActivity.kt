@@ -9,7 +9,10 @@ import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var contacts: ArrayList<Contact> = ArrayList()
+    companion object {
+        var contacts: ArrayList<Contact> = ArrayList()
+        fun getContact(index: Int) = contacts[index]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
