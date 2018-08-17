@@ -3,6 +3,7 @@ package com.maycc.mycontacts
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_contact_detail.*
+import kotlinx.android.synthetic.main.toolbar_detail.*
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -12,10 +13,17 @@ class ContactDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_detail)
 
+        showBackButton()
+
         val contactPosition = intent.getIntExtra("CONTACT_POSITION", 0)
         val contact = MainActivity.getContact(contactPosition)
 
         showContactDetails(contact)
+    }
+
+    private fun showBackButton() {
+        setSupportActionBar(toolBarDetail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun showContactDetails(contact: Contact) {

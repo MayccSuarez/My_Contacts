@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ContactDetailActivity">
 
-    <include
-        android:id="@+id/includeToolbar"
-        layout="@layout/toolbar_detail" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBarDetail"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="@string/title_detail_contact"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
 
     <ImageView
         android:id="@+id/ivDetailContact"
@@ -19,7 +26,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarDetail"
         app:srcCompat="@drawable/foto_01" />
 
     <TextView
