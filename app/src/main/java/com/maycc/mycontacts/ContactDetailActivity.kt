@@ -20,8 +20,7 @@ class ContactDetailActivity : AppCompatActivity() {
 
     private fun showContactDetails(contact: Contact) {
         ivDetailContact.setImageResource(contact.img)
-        tvDetailName.text = contact.name
-        tvDetailLastName.text = contact.lastName
+        tvDetailName.text = "${contact.name} ${contact.lastName}"
         tvDetailPhone.text = contact.phone
         tvDetailEmail.text = contact.email
     }
