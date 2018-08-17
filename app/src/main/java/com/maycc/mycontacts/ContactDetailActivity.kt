@@ -15,8 +15,7 @@ class ContactDetailActivity : AppCompatActivity() {
 
         showBackButton()
 
-        val contactPosition = intent.getIntExtra("CONTACT_POSITION", 0)
-        val contact = MainActivity.getContact(contactPosition)
+        val contact = intent.getSerializableExtra("CONTACT") as Contact
 
         showContactDetails(contact)
     }

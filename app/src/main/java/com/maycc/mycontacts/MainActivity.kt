@@ -9,10 +9,7 @@ import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        var contacts: ArrayList<Contact> = ArrayList()
-        fun getContact(index: Int) = contacts[index]
-    }
+    var contacts: ArrayList<Contact> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         lvContacts.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, ContactDetailActivity::class.java)
             intent.putExtra("CONTACT_POSITION", position)
+            intent.putExtra("CONTACT", contacts[position])
             startActivity(intent)
         }
     }
