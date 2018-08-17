@@ -3,7 +3,6 @@ package com.maycc.mycontacts
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_contact_detail.*
-import kotlinx.android.synthetic.main.toolbar_detail.*
 
 class ContactDetailActivity : AppCompatActivity() {
 
