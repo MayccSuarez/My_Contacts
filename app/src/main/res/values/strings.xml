@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">My Contacts</string>
     <string name="title_detail_contact">Detalles del contacto</string>
+    <string name="title_new_contact">Nuevo contacto</string>
+    <string name="hint_name_contact">Nombre del contacto</string>
+    <string name="hint_last_name_contact">Apellido del contacto</string>
+    <string name="hint_phone_contact">Tef: 0985044508</string>
+    <string name="hint_email_contact">email: nombre@gamil.com</string>
     <string name="txt_img_description">Img Contacto</string>
     <string name="txt_new_contact">Nuevo</string>
     <string name="title_item_search">Search</string>
