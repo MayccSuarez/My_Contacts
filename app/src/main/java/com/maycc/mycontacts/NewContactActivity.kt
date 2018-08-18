@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_new_contact.*
 
 class NewContactActivity: AppCompatActivity() {
 
+    val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
+                        R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
