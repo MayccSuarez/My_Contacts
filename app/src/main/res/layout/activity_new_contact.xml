@@ -20,12 +20,14 @@
         />
 
     <ImageView
+        android:id="@+id/ivContact"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginTop="16dp"
         app:srcCompat="@drawable/foto_01" />
 
     <EditText
+        android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_name_contact"
@@ -34,6 +36,7 @@
         />
 
     <EditText
+        android:id="@+id/edtLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_last_name_contact"
@@ -42,6 +45,7 @@
         />
 
     <EditText
+        android:id="@+id/edtPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_phone_contact"
@@ -50,6 +54,7 @@
         />
 
     <EditText
+        android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_email_contact"

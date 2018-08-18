@@ -10,7 +10,15 @@ import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var contacts: ArrayList<Contact> = ArrayList()
+    lateinit var adapter: ContactAdapter
+
+    companion object {
+        var contacts: ArrayList<Contact> = ArrayList()
+
+        fun addContact(contact: Contact) {
+            contacts.add(contact)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListViewContacts() {
-        val adapter = ContactAdapter(this, contacts)
+        adapter = ContactAdapter(this, contacts)
         lvContacts.adapter = adapter
     }
 
@@ -60,5 +68,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        adapter.notifyDataSetChanged()
+        super.onResume()
     }
 }
