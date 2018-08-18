@@ -101,7 +101,7 @@ class NewContactActivity: AppCompatActivity() {
         alert.setTitle("Selecciona una imagen: ")
         
         alert.setAdapter(adapterDialog) {dialog, which ->
-            showToast(this, "Has seleccionado la foto ${which + 1}")
+            setPhoto(which)
         }
 
         alert.setNegativeButton("CANCELAR") {dialog, which ->
@@ -109,5 +109,11 @@ class NewContactActivity: AppCompatActivity() {
         }
 
         alert.show()
+    }
+
+    private fun setPhoto(index: Int) {
+        val selectedPhoto = photos[index]
+
+        ivContact.setImageResource(selectedPhoto)
     }
 }
