@@ -1,12 +1,14 @@
 package com.maycc.mycontacts
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_new_contact.*
 
-class NewContactActivity : AppCompatActivity() {
+class NewContactActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,9 @@ class NewContactActivity : AppCompatActivity() {
         val email = edtEmail.text.toString()
         val photo = R.drawable.foto_01
 
-        MainActivity.addContact(Contact(name, lastName, phone, email, photo))
+        val contact = Contact(name, lastName, phone, email, photo)
+        val intent = Intent()
+        intent.putExtra("ADD_CONTACT", contact)
+        setResult(Activity.RESULT_OK, intent)
     }
 }

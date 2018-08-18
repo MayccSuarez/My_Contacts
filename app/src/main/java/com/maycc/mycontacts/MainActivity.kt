@@ -1,5 +1,6 @@
 package com.maycc.mycontacts
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,16 +10,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
+    private var contacts: ArrayList<Contact> = ArrayList()
+    private lateinit var adapter: ContactAdapter
 
-    lateinit var adapter: ContactAdapter
-
-    companion object {
-        var contacts: ArrayList<Contact> = ArrayList()
-
-        fun addContact(contact: Contact) {
-            contacts.add(contact)
-        }
-    }
+    private val addContactCode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +41,6 @@ class MainActivity : AppCompatActivity() {
     private fun addListenerListViewContacts() {
         lvContacts.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, ContactDetailActivity::class.java)
-            intent.putExtra("CONTACT_POSITION", position)
             intent.putExtra("CONTACT", contacts[position])
             startActivity(intent)
         }
@@ -63,15 +57,32 @@ class MainActivity : AppCompatActivity() {
         when (item?.itemId) {
             R.id.itemNew -> {
                 val intent = Intent(this, NewContactActivity::class.java)
-                startActivity(intent)
+                startActivityForResult(intent, addContactCode)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == addContactCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                val contact = data?.getSerializableExtra("ADD_CONTACT") as Contact
+                addContact(contact)
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun addContact(contact: Contact) {
+        contacts.add(contact)
+    }
+
     override fun onResume() {
         adapter.notifyDataSetChanged()
         super.onResume()
     }
+
 }
