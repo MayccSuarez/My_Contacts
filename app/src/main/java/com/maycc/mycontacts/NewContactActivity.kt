@@ -81,6 +81,8 @@ class NewContactActivity: AppCompatActivity() {
         val intent = Intent()
         intent.putExtra("ADD_CONTACT", contact)
         setResult(Activity.RESULT_OK, intent)
+
+        showToast(this, "Contacto creado!!!")
     }
 
     private fun addListenerIVContact() {
