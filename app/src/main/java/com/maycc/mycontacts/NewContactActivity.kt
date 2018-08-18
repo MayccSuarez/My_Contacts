@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_new_contact.*
 
 class NewContactActivity: AppCompatActivity() {
@@ -86,9 +87,18 @@ class NewContactActivity: AppCompatActivity() {
     private fun showAlertDialog() {
         val alert = AlertDialog.Builder(this)
 
-        alert.setTitle("Selecciona una imagen: ")
-        alert.setPositiveButton("GUARDAR") {dialog, which ->
+        val adapterDialog = ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item)
+        adapterDialog.add("Foto 01")
+        adapterDialog.add("Foto 02")
+        adapterDialog.add("Foto 03")
+        adapterDialog.add("Foto 04")
+        adapterDialog.add("Foto 05")
+        adapterDialog.add("Foto 06")
 
+        alert.setTitle("Selecciona una imagen: ")
+        
+        alert.setAdapter(adapterDialog) {dialog, which ->
+            showToast(this, "Has seleccionado la foto ${which + 1}")
         }
 
         alert.setNegativeButton("CANCELAR") {dialog, which ->
