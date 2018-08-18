@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_new_contact.*
@@ -15,6 +16,7 @@ class NewContactActivity: AppCompatActivity() {
         setContentView(R.layout.activity_new_contact)
 
         showBackButton()
+        addListenerIVContact()
     }
 
     private fun showBackButton() {
@@ -73,5 +75,26 @@ class NewContactActivity: AppCompatActivity() {
         val intent = Intent()
         intent.putExtra("ADD_CONTACT", contact)
         setResult(Activity.RESULT_OK, intent)
+    }
+
+    private fun addListenerIVContact() {
+        ivContact.setOnClickListener {
+            showAlertDialog()
+        }
+    }
+
+    private fun showAlertDialog() {
+        val alert = AlertDialog.Builder(this)
+
+        alert.setTitle("Selecciona una imagen: ")
+        alert.setPositiveButton("GUARDAR") {dialog, which ->
+
+        }
+
+        alert.setNegativeButton("CANCELAR") {dialog, which ->
+            dialog.dismiss()
+        }
+
+        alert.show()
     }
 }
