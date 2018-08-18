@@ -12,8 +12,10 @@ import kotlinx.android.synthetic.main.activity_new_contact.*
 
 class NewContactActivity: AppCompatActivity() {
 
-    val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
+    private val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
                         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
+
+    private var selectedPhoto = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +75,7 @@ class NewContactActivity: AppCompatActivity() {
         val lastName = edtLastName.text.toString()
         val phone = edtPhone.text.toString()
         val email = edtEmail.text.toString()
-        val photo = R.drawable.foto_01
+        val photo = selectedPhoto
 
         val contact = Contact(name, lastName, phone, email, photo)
         val intent = Intent()
@@ -112,8 +114,7 @@ class NewContactActivity: AppCompatActivity() {
     }
 
     private fun setPhoto(index: Int) {
-        val selectedPhoto = photos[index]
-
+        selectedPhoto = photos[index]
         ivContact.setImageResource(selectedPhoto)
     }
 }
