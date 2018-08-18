@@ -15,7 +15,7 @@ class NewContactActivity: AppCompatActivity() {
     private val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
                         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
 
-    private var selectedPhoto = 0
+    private var selectedPhoto = photos[0]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
