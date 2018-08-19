@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -14,12 +15,15 @@ class NewContactActivity: AppCompatActivity() {
 
     private val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
                         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
-
     private var selectedPhoto = photos[0]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
+
+        if (intent.hasExtra("EDIT CONTACT")) {
+            Log.d("HAS_EXTRA_EDIT_CONTACT", "Contacto recibido")
+        }
 
         showBackButton()
         addListenerIVContact()
