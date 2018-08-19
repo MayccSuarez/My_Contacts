@@ -2,6 +2,8 @@ package com.maycc.mycontacts
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_contact_detail.*
 
 class ContactDetailActivity : AppCompatActivity() {
@@ -30,4 +32,11 @@ class ContactDetailActivity : AppCompatActivity() {
         tvDetailPhone.text = contact.phone
         tvDetailEmail.text = contact.email
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_details_contact, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
 }

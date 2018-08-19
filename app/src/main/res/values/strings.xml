@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">My Contacts</string>
     <string name="title_detail_contact">Detalles del contacto</string>
+    <string name="title_delete_contact">Eliminar contacto</string>
+    <string name="title_edit_contact">Editar contacto</string>
     <string name="title_new_contact">Nuevo contacto</string>
     <string name="hint_name_contact">Nombre del contacto</string>
     <string name="hint_last_name_contact">Apellido del contacto</string>
