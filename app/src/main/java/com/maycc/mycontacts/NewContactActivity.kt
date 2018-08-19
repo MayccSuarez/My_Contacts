@@ -22,11 +22,20 @@ class NewContactActivity: AppCompatActivity() {
         setContentView(R.layout.activity_new_contact)
 
         if (intent.hasExtra("EDIT CONTACT")) {
-            Log.d("HAS_EXTRA_EDIT_CONTACT", "Contacto recibido")
+            val contactToEdit = intent.getSerializableExtra("EDIT CONTACT") as Contact
+            showDataContact(contactToEdit)
         }
 
         showBackButton()
         addListenerIVContact()
+    }
+
+    private fun showDataContact(contact: Contact) {
+        ivContact.setImageResource(contact.img)
+        edtName.setText(contact.name)
+        edtLastName.setText(contact.lastName)
+        edtPhone.setText(contact.phone)
+        edtEmail.setText(contact.email)
     }
 
     private fun showBackButton() {
