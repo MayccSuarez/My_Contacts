@@ -58,6 +58,7 @@ class ContactDetailActivity : AppCompatActivity() {
 
             R.id.itemEdit -> {
                 sendContactToEdit()
+                return true
             }
         }
 
@@ -77,6 +78,7 @@ class ContactDetailActivity : AppCompatActivity() {
         intent.putExtra(editContact, contact)
         Log.d(tag, contact.lastName)
         startActivity(intent)
+        finish()
     }
 
 }
