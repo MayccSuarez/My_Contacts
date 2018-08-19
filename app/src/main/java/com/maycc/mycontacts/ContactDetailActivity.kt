@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_contact_detail.*
@@ -11,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_contact_detail.*
 class ContactDetailActivity : AppCompatActivity() {
 
     private val tag = ContactDetailActivity::class.java.simpleName
+    private lateinit var contact: Contact
+    private val editContact = "EDIT CONTACT"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +21,7 @@ class ContactDetailActivity : AppCompatActivity() {
 
         showBackButton()
 
-        val contact = intent.getSerializableExtra("CONTACT") as Contact
+        contact = intent.getSerializableExtra("CONTACT") as Contact
 
         showContactDetails(contact)
     }
@@ -52,6 +55,10 @@ class ContactDetailActivity : AppCompatActivity() {
                 deleteContact()
                 return true
             }
+
+            R.id.itemEdit -> {
+                sendContactToEdit()
+            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -63,6 +70,13 @@ class ContactDetailActivity : AppCompatActivity() {
 
         showToast(this, "Contacto eliminado!!!")
         finish()
+    }
+
+    private fun sendContactToEdit() {
+        val intent = Intent(this, NewContactActivity::class.java)
+        intent.putExtra(editContact, contact)
+        Log.d(tag, contact.lastName)
+        startActivity(intent)
     }
 
 }
