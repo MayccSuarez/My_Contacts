@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ContactAdapter
 
     private val addContactCode = 1
+    private val deleteContactCode = 2
+
+    private var positionContact = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +43,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListenerListViewContacts() {
         lvContacts.setOnItemClickListener { parent, view, position, id ->
+            positionContact = position
+
             val intent = Intent(this, ContactDetailActivity::class.java)
             intent.putExtra("CONTACT", contacts[position])
-            startActivity(intent)
+            intent.putExtra("POSITION", position)
+            startActivityForResult(intent, deleteContactCode)
         }
     }
 
@@ -73,11 +79,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if (requestCode == deleteContactCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                deleteContact()
+            }
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun addContact(contact: Contact) {
         contacts.add(contact)
+    }
+
+    private fun deleteContact() {
+        contacts.removeAt(positionContact)
     }
 
     override fun onResume() {

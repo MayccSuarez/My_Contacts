@@ -1,5 +1,7 @@
 package com.maycc.mycontacts
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -45,9 +47,22 @@ class ContactDetailActivity : AppCompatActivity() {
                 finish()
                 return true
             }
+
+            R.id.itemDelete -> {
+                deleteContact()
+                return true
+            }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteContact() {
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+
+        showToast(this, "Contacto eliminado!!!")
+        finish()
     }
 
 }
