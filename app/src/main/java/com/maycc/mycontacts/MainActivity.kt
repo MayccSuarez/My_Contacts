@@ -10,13 +10,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var contacts: ArrayList<Contact> = ArrayList()
+
     private lateinit var adapter: ContactAdapter
 
     private val addContactCode = 1
     private val deleteContactCode = 2
 
-    private var positionContact = 0
+
+
+    companion object {
+        private var contacts: ArrayList<Contact> = ArrayList()
+        private var positionContact = 0
+
+        fun updateContact(contact: Contact) {
+            contacts[positionContact] = contact
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

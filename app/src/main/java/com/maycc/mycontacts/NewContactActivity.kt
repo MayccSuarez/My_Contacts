@@ -17,12 +17,17 @@ class NewContactActivity: AppCompatActivity() {
                         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
     private var selectedPhoto = photos[0]
 
+    private var update = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
 
         if (intent.hasExtra("EDIT CONTACT")) {
+            update = 1
+
             val contactToEdit = intent.getSerializableExtra("EDIT CONTACT") as Contact
+            selectedPhoto = contactToEdit.img
             showDataContact(contactToEdit)
         }
 
@@ -96,11 +101,17 @@ class NewContactActivity: AppCompatActivity() {
         val photo = selectedPhoto
 
         val contact = Contact(name, lastName, phone, email, photo)
-        val intent = Intent()
-        intent.putExtra("ADD_CONTACT", contact)
-        setResult(Activity.RESULT_OK, intent)
 
-        showToast(this, "Contacto creado!!!")
+        if (update == 1) {
+            MainActivity.updateContact(contact)
+            showToast(this, "Contacto actualizado!!!")
+        } else {
+            val intent = Intent()
+            intent.putExtra("ADD_CONTACT", contact)
+            setResult(Activity.RESULT_OK, intent)
+
+            showToast(this, "Contacto creado!!!")
+        }
     }
 
     private fun addListenerIVContact() {
