@@ -38,6 +38,11 @@ class NewContactActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+
             R.id.itemSave -> {
                 val emptyFields = validateFields()
 
