@@ -2,6 +2,7 @@ package com.maycc.mycontacts
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_contact_detail.*
 
 class ContactDetailActivity : AppCompatActivity() {
@@ -29,5 +30,16 @@ class ContactDetailActivity : AppCompatActivity() {
         tvDetailName.text = "${contact.name} ${contact.lastName}"
         tvDetailPhone.text = contact.phone
         tvDetailEmail.text = contact.email
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home ->  {
+                finish()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
