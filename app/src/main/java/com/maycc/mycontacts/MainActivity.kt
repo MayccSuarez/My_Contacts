@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -64,7 +65,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
 
+        bindSearchView(menu)
+
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun bindSearchView(menu: Menu?) {
+        val itemSearch = menu?.findItem(R.id.itemSearch)
+        val searchView = itemSearch?.actionView as SearchView
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
