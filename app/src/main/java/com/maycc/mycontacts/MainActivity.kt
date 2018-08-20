@@ -73,6 +73,23 @@ class MainActivity : AppCompatActivity() {
     private fun bindSearchView(menu: Menu?) {
         val itemSearch = menu?.findItem(R.id.itemSearch)
         val searchView = itemSearch?.actionView as SearchView
+
+        addListenerSearchView(searchView)
+    }
+
+    private fun addListenerSearchView(searchView: SearchView) {
+        searchView.queryHint = "Nombre del contacto"
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
