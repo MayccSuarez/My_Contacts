@@ -1,6 +1,7 @@
 package com.maycc.mycontacts
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.item_contact_layout.view.*
 
-class ContactAdapter(private val context: Context, val contacts: ArrayList<Contact>) : BaseAdapter() {
+class ContactAdapter(private val context: Context, private var contacts: ArrayList<Contact>) : BaseAdapter() {
+    private val copyContacts: ArrayList<Contact> = ArrayList(contacts)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view: View? = convertView
@@ -41,6 +43,25 @@ class ContactAdapter(private val context: Context, val contacts: ArrayList<Conta
 
     override fun getCount(): Int {
         return contacts.count()
+    }
+
+    fun search(txt: String ) {
+        contacts.clear()
+
+        if (txt.isEmpty()) {
+            contacts = ArrayList(copyContacts)
+        } else {
+            var nameContact: String
+
+            for (contact in copyContacts) {
+                nameContact = contact.name.toLowerCase()
+
+                if (nameContact.contains(txt.toLowerCase()))
+                    contacts.add(contact)
+            }
+        }
+
+        notifyDataSetChanged()
     }
 
     private class ViewHolder(view: View) {

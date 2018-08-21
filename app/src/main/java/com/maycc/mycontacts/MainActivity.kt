@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.SearchView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,8 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private val addContactCode = 1
     private val deleteContactCode = 2
-
-
 
     companion object {
         private var contacts: ArrayList<Contact> = ArrayList()
@@ -86,7 +85,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                if (newText != null) {
+                    adapter.search(newText)
+                }
+                return true
             }
 
         })
