@@ -1,7 +1,6 @@
 package com.maycc.mycontacts
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +60,38 @@ class ContactAdapter(private val context: Context, private var contacts: ArrayLi
             }
         }
 
+        notifyDataSetChanged()
+    }
+
+    fun findPositionContact(id :Int) :Int {
+        val position :Int
+
+        for (i in copyContacts.indices) {
+            val idContact = copyContacts[i].id
+            if (idContact == id) {
+                position = i
+                return position
+            }
+        }
+
+        return -1
+    }
+
+    fun deleteItem(position: Int) {
+        copyContacts.removeAt(position)
+        contacts = ArrayList(copyContacts)
+        notifyDataSetChanged()
+    }
+
+    fun updateItem(position: Int, contact: Contact) {
+        copyContacts[position] = contact
+        contacts = ArrayList(copyContacts)
+        notifyDataSetChanged()
+    }
+
+    fun addItem(contact: Contact) {
+        copyContacts.add(contact)
+        contacts = ArrayList(copyContacts)
         notifyDataSetChanged()
     }
 
