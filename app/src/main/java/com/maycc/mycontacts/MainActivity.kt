@@ -1,11 +1,12 @@
 package com.maycc.mycontacts
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.SearchView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,18 +14,29 @@ import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: ContactAdapter
-
-    private val addContactCode = 1
-    private val deleteContactCode = 2
-
     companion object {
+        lateinit var adapter: ContactAdapter
         private var contacts: ArrayList<Contact> = ArrayList()
-        private var positionContact = 0
+
+        fun getContact(position: Int) :Contact {
+            return adapter.getItem(position) as Contact
+        }
+
+        fun deleteContact(id: Int) {
+            val position = adapter.findPositionContact(id)
+            adapter.deleteItem(position)
+        }
 
         fun updateContact(contact: Contact) {
-            contacts[positionContact] = contact
+            val position = adapter.findPositionContact(contact.id)
+            adapter.updateItem(position, contact)
         }
+
+        fun addContact(contact: Contact) {
+            adapter.addItem(contact)
+        }
+
+        fun getNumberOfContacts() = adapter.count
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +50,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        contacts.add(Contact("Maycc", "Suárez", "0985045480", "mr@gmail.com", R.drawable.foto_01))
-        contacts.add(Contact("Kevin", "Suárez", "0985045480", "kv@gmail.com", R.drawable.foto_02))
-        contacts.add(Contact("Anita", "Jiménez", "0985045480", "anita@gmail.com", R.drawable.foto_03))
-        contacts.add(Contact("Juan", "Mora", "0985045480", "juan@gmail.com", R.drawable.foto_04))
+        contacts.add(Contact(1, "Maycc", "Suárez", "0985045480", "mr@gmail.com", R.drawable.foto_01))
+        contacts.add(Contact(2, "Kevin", "Suárez", "0985045480", "kv@gmail.com", R.drawable.foto_02))
+        contacts.add(Contact(3, "Anita", "Jiménez", "0985045480", "anita@gmail.com", R.drawable.foto_03))
+        contacts.add(Contact(4, "Juan", "Mora", "0985045480", "juan@gmail.com", R.drawable.foto_04))
 
     }
 
@@ -52,12 +64,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListenerListViewContacts() {
         lvContacts.setOnItemClickListener { parent, view, position, id ->
-            positionContact = position
-
             val intent = Intent(this, ContactDetailActivity::class.java)
-            intent.putExtra("CONTACT", contacts[position])
-            intent.putExtra("POSITION", position)
-            startActivityForResult(intent, deleteContactCode)
+            intent.putExtra("CONTACT", getContact(position))
+            startActivity(intent)
         }
     }
 
@@ -70,8 +79,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindSearchView(menu: Menu?) {
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
         val itemSearch = menu?.findItem(R.id.itemSearch)
         val searchView = itemSearch?.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
         addListenerSearchView(searchView)
     }
@@ -99,42 +111,12 @@ class MainActivity : AppCompatActivity() {
         when (item?.itemId) {
             R.id.itemNew -> {
                 val intent = Intent(this, NewContactActivity::class.java)
-                startActivityForResult(intent, addContactCode)
+                startActivity(intent)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        if (requestCode == addContactCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                val contact = data?.getSerializableExtra("ADD_CONTACT") as Contact
-                addContact(contact)
-            }
-        }
-
-        if (requestCode == deleteContactCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                deleteContact()
-            }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun addContact(contact: Contact) {
-        contacts.add(contact)
-    }
-
-    private fun deleteContact() {
-        contacts.removeAt(positionContact)
-    }
-
-    override fun onResume() {
-        adapter.notifyDataSetChanged()
-        super.onResume()
-    }
 
 }
