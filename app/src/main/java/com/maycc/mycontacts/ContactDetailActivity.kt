@@ -66,9 +66,7 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
     private fun deleteContact() {
-        val intent = Intent()
-        setResult(Activity.RESULT_OK, intent)
-
+        MainActivity.deleteContact(contact.id)
         showToast(this, "Contacto eliminado!!!")
         finish()
     }
@@ -76,7 +74,6 @@ class ContactDetailActivity : AppCompatActivity() {
     private fun sendContactToEdit() {
         val intent = Intent(this, NewContactActivity::class.java)
         intent.putExtra(editContact, contact)
-        Log.d(tag, contact.lastName)
         startActivity(intent)
         finish()
     }
