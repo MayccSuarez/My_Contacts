@@ -1,11 +1,8 @@
 package com.maycc.mycontacts
 
-import android.app.Activity
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -16,7 +13,7 @@ class NewContactActivity: AppCompatActivity() {
     private val photos = arrayOf(R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
                         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06)
     private var selectedPhoto = photos[0]
-
+    private var idContactToUpdate = -1
     private var update = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +25,7 @@ class NewContactActivity: AppCompatActivity() {
 
             val contactToEdit = intent.getSerializableExtra("EDIT CONTACT") as Contact
             selectedPhoto = contactToEdit.img
+            idContactToUpdate = contactToEdit.id
             showDataContact(contactToEdit)
         }
 
@@ -100,15 +98,18 @@ class NewContactActivity: AppCompatActivity() {
         val email = edtEmail.text.toString()
         val photo = selectedPhoto
 
-        val contact = Contact(name, lastName, phone, email, photo)
+        val contact = Contact(idContactToUpdate, name, lastName, phone, email, photo)
 
         if (update == 1) {
             MainActivity.updateContact(contact)
             showToast(this, "Contacto actualizado!!!")
+
+        // Create Contact
         } else {
-            val intent = Intent()
-            intent.putExtra("ADD_CONTACT", contact)
-            setResult(Activity.RESULT_OK, intent)
+            val number = MainActivity.getNumberOfContacts()
+            val idContactNew = number + 1
+            contact.id = idContactNew
+            MainActivity.addContact(contact)
 
             showToast(this, "Contacto creado!!!")
         }
