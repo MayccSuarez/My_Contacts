@@ -1,6 +1,5 @@
 package com.maycc.mycontacts
 
-import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -9,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Switch
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 
@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
 
         bindSearchView(menu)
+        bindSwitchView(menu)
 
         return super.onCreateOptionsMenu(menu)
     }
@@ -104,6 +105,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun bindSwitchView(menu: Menu?) {
+        val itemSwitch = menu?.findItem(R.id.itemSwitch)
+        itemSwitch?.setActionView(R.layout.switch_item)
+        val viewSwitch = itemSwitch?.actionView?.findViewById<Switch>(R.id.switchView)
+
+        viewSwitch?.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewSwitcher.showNext()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
