@@ -11,9 +11,23 @@
         layout="@layout/toolbar_main"
         />
 
-    <ListView
-        android:id="@+id/lvContacts"
+    <ViewSwitcher
+        android:id="@+id/vsChange"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lvContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <GridView
+            android:id="@+id/gvContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </ViewSwitcher>
+
+
 
 </LinearLayout>
