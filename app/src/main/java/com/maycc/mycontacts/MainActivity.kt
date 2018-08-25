@@ -9,7 +9,6 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Switch
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 
@@ -60,7 +59,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListViewContacts() {
-        adapter = ContactAdapter(this, contacts, R.layout.item_contact_layout)
+        adapter = ContactAdapter(this, contacts)
+        ContactAdapter.setItemL(R.layout.item_contact_layout)
         lvContacts.adapter = adapter
     }
 
@@ -128,13 +128,20 @@ class MainActivity : AppCompatActivity() {
             viewSwitcher.showNext()
             // Mostrar la vista de Grid
            if (isChecked) {
-                initGridLayout()
+                changeToGridView()
+           } else {
+                changeToListView()
            }
         }
     }
 
-    private fun initGridLayout() {
-        adapter = ContactAdapter(this, contacts, R.layout.item_contact_grid_layout)
+    private fun changeToGridView() {
+        ContactAdapter.setItemL(R.layout.item_contact_grid_layout)
+        gvContacts.adapter = adapter
+    }
+
+    private fun changeToListView() {
+        ContactAdapter.setItemL(R.layout.item_contact_layout)
         gvContacts.adapter = adapter
     }
 

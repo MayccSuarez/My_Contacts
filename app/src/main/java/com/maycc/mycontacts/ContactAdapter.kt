@@ -9,8 +9,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.item_contact_layout.view.*
 
-class ContactAdapter(private val context: Context, private var contacts: ArrayList<Contact>, private val itemLayout: Int) : BaseAdapter() {
+class ContactAdapter(private val context: Context, private var contacts: ArrayList<Contact>) : BaseAdapter() {
     private val copyContacts: ArrayList<Contact> = ArrayList(contacts)
+
+    companion object {
+        var itemLayout = 0
+
+        fun setItemL(id: Int) {
+            itemLayout = id
+        }
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view: View? = convertView
