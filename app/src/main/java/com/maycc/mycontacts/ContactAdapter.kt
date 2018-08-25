@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.item_contact_layout.view.*
 
-class ContactAdapter(private val context: Context, private var contacts: ArrayList<Contact>) : BaseAdapter() {
+class ContactAdapter(private val context: Context, private var contacts: ArrayList<Contact>, private val itemLayout: Int) : BaseAdapter() {
     private val copyContacts: ArrayList<Contact> = ArrayList(contacts)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -17,7 +17,7 @@ class ContactAdapter(private val context: Context, private var contacts: ArrayLi
         val viewHolder: ViewHolder?
 
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_contact_layout, null)
+            view = LayoutInflater.from(context).inflate(itemLayout, null)
             viewHolder = ViewHolder(view)
             view?.tag = viewHolder
         } else {
