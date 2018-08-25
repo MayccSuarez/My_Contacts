@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         loadData()
         initListViewContacts()
         addListenerListViewContacts()
+        addListenerGridViewContacts()
     }
 
     private fun loadData() {
@@ -65,9 +66,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListenerListViewContacts() {
         lvContacts.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(this, ContactDetailActivity::class.java)
-            intent.putExtra("CONTACT", getContact(position))
-            startActivity(intent)
+            goContactDetailActivity(position)
+        }
+    }
+
+    private fun goContactDetailActivity(position: Int) {
+        val intent = Intent(this, ContactDetailActivity::class.java)
+        intent.putExtra("CONTACT", getContact(position))
+        startActivity(intent)
+    }
+
+    private fun addListenerGridViewContacts() {
+        gvContacts.setOnItemClickListener { parent, view, position, id ->
+            goContactDetailActivity(position)
         }
     }
 
@@ -138,6 +149,5 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
 
 }
